@@ -13,10 +13,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
+
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: LATEST
+
       - name: Install R dependencies
         run:
           Rscript -e "install.packages('renv', repos = 'https://packagemanager.posit.co/cran/latest')"
@@ -25,5 +27,13 @@ jobs:
       - name: Render Quarto document
         run:
           quarto render readme.qmd --to gfm --output README.md
+
+      - name: Commit README
+        run:
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update README.md from readme.qmd"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
