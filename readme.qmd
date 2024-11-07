@@ -8,3 +8,4 @@ current_time <- Sys.time() |>
 ```
 
 Hello. This file was rendered at `{r} current_time`. 
+
