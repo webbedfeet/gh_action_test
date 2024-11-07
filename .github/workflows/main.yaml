@@ -2,7 +2,8 @@ name: Render README
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
   render:
@@ -20,16 +21,16 @@ jobs:
           version: LATEST
 
       - name: Install R dependencies
-        run:
+        run: |
           Rscript -e "install.packages('renv', repos = 'https://packagemanager.posit.co/cran/latest')"
           Rscript -e "renv::restore(repos = 'https://packagemanager.posit.co/cran/latest')"
 
       - name: Render Quarto document
-        run:
+        run: |
           quarto render readme.qmd --to gfm --output README.md
 
       - name: Commit README
-        run:
+        run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
