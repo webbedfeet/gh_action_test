@@ -3,7 +3,7 @@ name: Render README
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   render:
@@ -13,10 +13,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           version: LATEST
 
