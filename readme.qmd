@@ -4,7 +4,7 @@
 ```{r}
 #| echo: false
 current_time <- Sys.time() |> 
-  format('%d/%m/%Y %H:%M')
+  format('%d/%m/%Y %H:%M %Z')
 ```
 
 Hello. This file was rendered at `{r} current_time`. 
